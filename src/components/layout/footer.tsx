@@ -1,25 +1,23 @@
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { Container } from '@/components/layout/container';
-import { siteConfig } from '@/config/site';
+import { Link } from '@/i18n/navigation';
 
-// NOTE: labels hardcoded pending i18n (Phase 3).
 export function Footer() {
+  const t = useTranslations('footer');
   return (
     <footer className="border-t py-8">
       <Container className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
-        <p>
-          © {new Date().getFullYear()} {siteConfig.name}
-        </p>
+        <p>{t('rights', { year: new Date().getFullYear() })}</p>
         <nav className="flex items-center gap-4">
           <Link href="/terms" className="hover:text-foreground">
-            Terms
+            {t('terms')}
           </Link>
           <Link href="/privacy" className="hover:text-foreground">
-            Privacy
+            {t('privacy')}
           </Link>
           <Link href="/refund-policy" className="hover:text-foreground">
-            Refund
+            {t('refund')}
           </Link>
         </nav>
       </Container>

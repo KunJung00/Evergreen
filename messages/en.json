@@ -1,0 +1,51 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "loading": "Loading…",
+    "back": "Back"
+  },
+  "nav": {
+    "pricing": "Pricing",
+    "signIn": "Sign in",
+    "dashboard": "Dashboard"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "th": "ไทย",
+    "en": "English"
+  },
+  "marketing": {
+    "hero": {
+      "badge": "SaaS Starter Template",
+      "title": "Build habits that stick",
+      "subtitle": "A production-ready Next.js 14 template — auth, billing, i18n, and a full habit tracker feature on top.",
+      "getStarted": "Get started",
+      "viewPricing": "View pricing"
+    },
+    "features": {
+      "habits": {
+        "title": "Habit Tracker",
+        "desc": "Track daily habits with streaks and a yearly heatmap."
+      },
+      "billing": {
+        "title": "Subscriptions",
+        "desc": "Stripe monthly & yearly billing with entitlement gating."
+      },
+      "i18n": {
+        "title": "i18n ready",
+        "desc": "Thai and English out of the box with next-intl."
+      }
+    }
+  },
+  "footer": {
+    "rights": "© {year} Evergreen",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "refund": "Refund"
+  }
+}
