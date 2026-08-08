@@ -37,8 +37,17 @@ Migrations live in `supabase/migrations/` (R9 — the only place schema changes 
 1. Import the repo in Vercel; framework preset **Next.js** is auto-detected.
 2. Add the env vars for Preview + Production.
 3. Every PR gets a preview deploy; merging to `main` deploys production.
-4. `vercel.json` registers the hourly cron for `/api/cron/weekly-summary`
-   (guarded by `CRON_SECRET`).
+4. **Cron is currently disabled** (`vercel.json` is `{}`). The Vercel **Hobby** plan only
+   allows once-daily crons, but `/api/cron/weekly-summary` is designed to run **hourly** so it
+   can email each user at Monday 08:00 in their own timezone. To enable it on a **Pro** plan,
+   add back:
+   ```json
+   { "crons": [{ "path": "/api/cron/weekly-summary", "schedule": "0 * * * *" }] }
+   ```
+   On Hobby you can instead trigger it manually (it's guarded by `CRON_SECRET`):
+   ```bash
+   curl -H "Authorization: Bearer $CRON_SECRET" https://<domain>/api/cron/weekly-summary
+   ```
 
 ## 5. Stripe webhook
 

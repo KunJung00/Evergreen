@@ -26,9 +26,10 @@ to your own address with Resend's onboarding domain.
 
 - `src/lib/email/send.tsx` — `sendEmail({ to, template, locale, data })` wrapper.
 - `emails/*` — react-email templates (bilingual via the `locale` arg).
-- The weekly summary is triggered by `GET /api/cron/weekly-summary`, which runs hourly
-  (see `vercel.json`) and emails users whose local time is Monday 08:00. It is guarded by
-  `CRON_SECRET`.
+- The weekly summary is triggered by `GET /api/cron/weekly-summary`, which emails users whose
+  local time is Monday 08:00. It is guarded by `CRON_SECRET`. The Vercel cron is **disabled by
+  default** (`vercel.json` is `{}`) because it needs an hourly schedule that the Hobby plan
+  doesn't allow — see [deployment.md](./deployment.md) to enable it on Pro or trigger it manually.
 
 ## 4. Preview templates
 
