@@ -248,6 +248,7 @@
       "nameTooLong": "Name is too long.",
       "validation": "Please check the form and try again.",
       "invalidCredentials": "Invalid email or password.",
+      "emailNotConfirmed": "Please confirm your email address before signing in. Check your inbox for the confirmation link.",
       "signUpFailed": "Could not create your account. Try again.",
       "resetFailed": "Could not update your password. Try again.",
       "rateLimited": "Too many attempts. Please wait a moment and try again.",

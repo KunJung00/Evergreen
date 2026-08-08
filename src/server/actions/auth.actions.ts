@@ -7,6 +7,7 @@ import { getLocale } from 'next-intl/server';
 
 import { env } from '@/env';
 import { routing } from '@/i18n/routing';
+import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rate-limit';
 import { createClient } from '@/lib/supabase/server';
 import { toFieldErrors } from '@/lib/validation';
@@ -45,7 +46,21 @@ export async function signIn(input: LoginInput): Promise<ActionResult> {
 
   const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword(parsed.data);
-  if (error) return { success: false, error: 'invalidCredentials' };
+  if (error) {
+    // Surface the real reason in logs/Sentry — the UI stays intentionally vague
+    // to avoid leaking which accounts exist, but "email not confirmed" is a
+    // distinct, actionable case worth telling the user about.
+    logger.warn('Sign-in failed', {
+      email: parsed.data.email,
+      code: error.code,
+      status: error.status,
+      reason: error.message,
+    });
+    if (error.code === 'email_not_confirmed') {
+      return { success: false, error: 'emailNotConfirmed' };
+    }
+    return { success: false, error: 'invalidCredentials' };
+  }
 
   revalidatePath('/', 'layout');
   return { success: true, data: undefined };
