@@ -10,6 +10,7 @@
     "pricing": "Pricing",
     "signIn": "Sign in",
     "dashboard": "Dashboard",
+    "admin": "Admin",
     "signOut": "Sign out"
   },
   "theme": {
@@ -115,5 +116,115 @@
   "dashboard": {
     "title": "Dashboard",
     "welcome": "Welcome, {name}."
+  },
+  "billing": {
+    "interval": {
+      "month": "Monthly",
+      "year": "Yearly"
+    },
+    "status": {
+      "trialing": "Trialing",
+      "active": "Active",
+      "past_due": "Past due",
+      "canceled": "Canceled",
+      "incomplete": "Incomplete",
+      "incomplete_expired": "Expired",
+      "unpaid": "Unpaid",
+      "paused": "Paused"
+    }
+  },
+  "admin": {
+    "badge": "Admin",
+    "nav": {
+      "overview": "Overview",
+      "users": "Users",
+      "subscriptions": "Subscriptions",
+      "logs": "Audit logs"
+    },
+    "table": {
+      "search": "Search…",
+      "empty": "No results found",
+      "previous": "Previous",
+      "next": "Next",
+      "showing": "Showing {from}–{to} of {total}",
+      "page": "Page {page} of {pages}"
+    },
+    "roles": {
+      "user": "User",
+      "admin": "Admin"
+    },
+    "overview": {
+      "title": "System overview",
+      "subtitle": "Key metrics across the platform",
+      "cards": {
+        "totalUsers": "Total users",
+        "admins": "Admins",
+        "activeSubscriptions": "Active subscriptions",
+        "auditLogs": "Audit logs"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Manage users and access levels",
+      "view": "View",
+      "changeRole": "Change role",
+      "role": {
+        "user": "User",
+        "admin": "Admin"
+      },
+      "columns": {
+        "email": "Email",
+        "name": "Name",
+        "role": "Role",
+        "joined": "Joined",
+        "actions": "Actions"
+      }
+    },
+    "userDetail": {
+      "back": "Back to users",
+      "profile": "Profile",
+      "subscription": "Subscription",
+      "noSubscription": "No subscription yet",
+      "fields": {
+        "role": "Role",
+        "locale": "Language",
+        "joined": "Joined",
+        "userId": "User ID",
+        "status": "Status",
+        "renews": "Renews on",
+        "subscriptionId": "Subscription ID"
+      }
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "subtitle": "View all subscription statuses",
+      "yes": "Yes",
+      "no": "No",
+      "columns": {
+        "user": "User",
+        "status": "Status",
+        "interval": "Billing",
+        "renews": "Renews on",
+        "cancelAtPeriodEnd": "Cancels at period end"
+      }
+    },
+    "logs": {
+      "title": "Audit logs",
+      "subtitle": "History of admin actions",
+      "system": "System",
+      "columns": {
+        "time": "Time",
+        "actor": "Actor",
+        "action": "Action",
+        "target": "Target"
+      }
+    },
+    "errors": {
+      "validation": "Invalid input. Please try again.",
+      "cannotChangeSelf": "You cannot change your own role.",
+      "userNotFound": "User not found.",
+      "updateFailed": "Update failed. Please try again.",
+      "generic": "Something went wrong. Please try again."
+    }
   }
 }

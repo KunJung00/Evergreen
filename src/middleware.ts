@@ -1,13 +1,17 @@
+import { createServerClient } from '@supabase/ssr';
 import createMiddleware from 'next-intl/middleware';
 import { NextResponse, type NextRequest } from 'next/server';
 
+import { env } from '@/env';
 import { routing } from '@/i18n/routing';
 import { updateSession } from '@/lib/supabase/middleware';
+import type { Database } from '@/types/database.types';
 
 const intlMiddleware = createMiddleware(routing);
 
 // Route groups keyed off the locale-stripped pathname (BUILD-SPEC §6, §8).
 const PROTECTED_PREFIXES = ['/dashboard', '/settings', '/admin'];
+const ADMIN_PREFIXES = ['/admin'];
 const GUEST_ONLY_PREFIXES = [
   '/login',
   '/register',
@@ -39,6 +43,26 @@ function matchesPrefix(pathname: string, prefixes: string[]): boolean {
   return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
 
+/**
+ * Lightweight role lookup for admin paths only. Reads the caller's own profile
+ * row (RLS "read own"), so it never risks the `profiles` recursion (pitfall P2)
+ * and adds a query solely on `/admin/*` requests.
+ */
+async function isAdmin(request: NextRequest, userId: string): Promise<boolean> {
+  const supabase = createServerClient<Database>(
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        getAll: () => request.cookies.getAll(),
+        setAll: () => undefined,
+      },
+    },
+  );
+  const { data } = await supabase.from('profiles').select('role').eq('id', userId).single();
+  return data?.role === 'admin';
+}
+
 /** Redirect while carrying over the auth cookies the session refresh just set. */
 function redirectWithCookies(path: string, request: NextRequest, base: NextResponse): NextResponse {
   const url = new URL(`${localePrefix(request.nextUrl.pathname)}${path}`, request.url);
@@ -65,8 +89,15 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     return redirectWithCookies('/dashboard', request, response);
   }
 
-  // Admin role-based guard (404 for non-admins) is added in Phase 5, once the
-  // (admin) pages exist. Until then /admin is covered by PROTECTED_PREFIXES.
+  // Admin guard: non-admins must not learn that /admin exists — rewrite to a
+  // non-matching path so Next renders the 404 boundary (BUILD-SPEC §8, §11
+  // Phase 5). The (admin) layout's requireAdmin() is the authoritative backstop.
+  if (matchesPrefix(pathname, ADMIN_PREFIXES) && user && !(await isAdmin(request, user.id))) {
+    const notFoundUrl = new URL('/_not-found', request.url);
+    const rewrite = NextResponse.rewrite(notFoundUrl);
+    response.cookies.getAll().forEach((cookie) => rewrite.cookies.set(cookie));
+    return rewrite;
+  }
 
   return response;
 }

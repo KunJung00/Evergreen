@@ -10,6 +10,7 @@
     "pricing": "ราคา",
     "signIn": "เข้าสู่ระบบ",
     "dashboard": "แดชบอร์ด",
+    "admin": "ผู้ดูแลระบบ",
     "signOut": "ออกจากระบบ"
   },
   "theme": {
@@ -115,5 +116,115 @@
   "dashboard": {
     "title": "แดชบอร์ด",
     "welcome": "ยินดีต้อนรับ {name}"
+  },
+  "billing": {
+    "interval": {
+      "month": "รายเดือน",
+      "year": "รายปี"
+    },
+    "status": {
+      "trialing": "ทดลองใช้",
+      "active": "ใช้งานอยู่",
+      "past_due": "ค้างชำระ",
+      "canceled": "ยกเลิกแล้ว",
+      "incomplete": "ยังไม่สมบูรณ์",
+      "incomplete_expired": "หมดอายุ",
+      "unpaid": "ยังไม่ชำระ",
+      "paused": "หยุดชั่วคราว"
+    }
+  },
+  "admin": {
+    "badge": "ผู้ดูแลระบบ",
+    "nav": {
+      "overview": "ภาพรวม",
+      "users": "ผู้ใช้",
+      "subscriptions": "การสมัครสมาชิก",
+      "logs": "บันทึกการตรวจสอบ"
+    },
+    "table": {
+      "search": "ค้นหา…",
+      "empty": "ไม่พบข้อมูล",
+      "previous": "ก่อนหน้า",
+      "next": "ถัดไป",
+      "showing": "แสดง {from}–{to} จาก {total}",
+      "page": "หน้า {page}/{pages}"
+    },
+    "roles": {
+      "user": "ผู้ใช้",
+      "admin": "แอดมิน"
+    },
+    "overview": {
+      "title": "ภาพรวมระบบ",
+      "subtitle": "สรุปตัวเลขสำคัญของระบบ",
+      "cards": {
+        "totalUsers": "ผู้ใช้ทั้งหมด",
+        "admins": "แอดมิน",
+        "activeSubscriptions": "สมาชิกที่ใช้งานอยู่",
+        "auditLogs": "บันทึกการตรวจสอบ"
+      }
+    },
+    "users": {
+      "title": "ผู้ใช้",
+      "subtitle": "จัดการผู้ใช้และสิทธิ์การเข้าถึง",
+      "view": "ดู",
+      "changeRole": "เปลี่ยนบทบาท",
+      "role": {
+        "user": "ผู้ใช้",
+        "admin": "แอดมิน"
+      },
+      "columns": {
+        "email": "อีเมล",
+        "name": "ชื่อ",
+        "role": "บทบาท",
+        "joined": "สมัครเมื่อ",
+        "actions": "การจัดการ"
+      }
+    },
+    "userDetail": {
+      "back": "กลับไปหน้าผู้ใช้",
+      "profile": "โปรไฟล์",
+      "subscription": "การสมัครสมาชิก",
+      "noSubscription": "ยังไม่มีการสมัครสมาชิก",
+      "fields": {
+        "role": "บทบาท",
+        "locale": "ภาษา",
+        "joined": "สมัครเมื่อ",
+        "userId": "รหัสผู้ใช้",
+        "status": "สถานะ",
+        "renews": "ต่ออายุวันที่",
+        "subscriptionId": "รหัสการสมัคร"
+      }
+    },
+    "subscriptions": {
+      "title": "การสมัครสมาชิก",
+      "subtitle": "ดูสถานะการสมัครสมาชิกทั้งหมด",
+      "yes": "ใช่",
+      "no": "ไม่",
+      "columns": {
+        "user": "ผู้ใช้",
+        "status": "สถานะ",
+        "interval": "รอบบิล",
+        "renews": "ต่ออายุวันที่",
+        "cancelAtPeriodEnd": "จะยกเลิกเมื่อจบรอบ"
+      }
+    },
+    "logs": {
+      "title": "บันทึกการตรวจสอบ",
+      "subtitle": "ประวัติการกระทำของผู้ดูแลระบบ",
+      "system": "ระบบ",
+      "columns": {
+        "time": "เวลา",
+        "actor": "ผู้กระทำ",
+        "action": "การกระทำ",
+        "target": "เป้าหมาย"
+      }
+    },
+    "errors": {
+      "validation": "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่",
+      "cannotChangeSelf": "ไม่สามารถเปลี่ยนบทบาทของตัวเองได้",
+      "userNotFound": "ไม่พบผู้ใช้",
+      "updateFailed": "อัปเดตไม่สำเร็จ กรุณาลองใหม่",
+      "generic": "เกิดข้อผิดพลาด กรุณาลองใหม่"
+    }
   }
 }
