@@ -21,6 +21,9 @@ export type Database = {
           role: Database['public']['Enums']['user_role'];
           locale: Database['public']['Enums']['app_locale'];
           stripe_customer_id: string | null;
+          timezone: string;
+          week_start: number;
+          weekly_email_opt_in: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -32,6 +35,9 @@ export type Database = {
           role?: Database['public']['Enums']['user_role'];
           locale?: Database['public']['Enums']['app_locale'];
           stripe_customer_id?: string | null;
+          timezone?: string;
+          week_start?: number;
+          weekly_email_opt_in?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -43,6 +49,9 @@ export type Database = {
           role?: Database['public']['Enums']['user_role'];
           locale?: Database['public']['Enums']['app_locale'];
           stripe_customer_id?: string | null;
+          timezone?: string;
+          week_start?: number;
+          weekly_email_opt_in?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -105,6 +114,97 @@ export type Database = {
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      habits: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          icon: string;
+          color: string;
+          frequency: Database['public']['Enums']['habit_frequency'];
+          target_per_day: number;
+          days_per_week: number | null;
+          sort_order: number;
+          archived_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          icon?: string;
+          color?: string;
+          frequency?: Database['public']['Enums']['habit_frequency'];
+          target_per_day?: number;
+          days_per_week?: number | null;
+          sort_order?: number;
+          archived_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          icon?: string;
+          color?: string;
+          frequency?: Database['public']['Enums']['habit_frequency'];
+          target_per_day?: number;
+          days_per_week?: number | null;
+          sort_order?: number;
+          archived_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'habits_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      habit_logs: {
+        Row: {
+          id: string;
+          habit_id: string;
+          user_id: string;
+          logged_date: string;
+          count: number;
+          note: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          habit_id: string;
+          user_id: string;
+          logged_date: string;
+          count?: number;
+          note?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          habit_id?: string;
+          user_id?: string;
+          logged_date?: string;
+          count?: number;
+          note?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'habit_logs_habit_id_fkey';
+            columns: ['habit_id'];
+            isOneToOne: false;
+            referencedRelation: 'habits';
             referencedColumns: ['id'];
           },
         ];
@@ -173,6 +273,7 @@ export type Database = {
         | 'unpaid'
         | 'paused';
       sub_interval: 'month' | 'year';
+      habit_frequency: 'daily' | 'weekly';
     };
     CompositeTypes: {
       [_ in never]: never;

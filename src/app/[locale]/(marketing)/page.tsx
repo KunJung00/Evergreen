@@ -18,6 +18,8 @@ export default async function LandingPage({ params }: Props) {
 function LandingContent() {
   const t = useTranslations('marketing');
   const featureKeys = ['habits', 'billing', 'i18n'] as const;
+  const statKeys = ['habitsTracked', 'successRate', 'activeUsers'] as const;
+  const faqKeys = ['q1', 'q2', 'q3', 'q4'] as const;
 
   return (
     <>
@@ -51,6 +53,55 @@ function LandingContent() {
               </CardHeader>
             </Card>
           ))}
+        </Container>
+      </section>
+
+      <section className="border-t bg-muted/30 py-20">
+        <Container>
+          <h2 className="text-center text-lg font-medium text-muted-foreground">
+            {t('socialProof.title')}
+          </h2>
+          <div className="mt-10 grid gap-8 sm:grid-cols-3">
+            {statKeys.map((key) => (
+              <div key={key} className="text-center">
+                <p className="text-4xl font-bold tracking-tight">
+                  {t(`socialProof.stats.${key}.value`)}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {t(`socialProof.stats.${key}.label`)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-24">
+        <Container className="mx-auto max-w-2xl">
+          <h2 className="text-center text-3xl font-bold tracking-tight">{t('faq.title')}</h2>
+          <div className="mt-10 space-y-4">
+            {faqKeys.map((key) => (
+              <details
+                key={key}
+                className="group rounded-lg border px-4 py-3 [&_summary::-webkit-details-marker]:hidden"
+              >
+                <summary className="cursor-pointer list-none font-medium marker:content-none">
+                  {t(`faq.items.${key}.question`)}
+                </summary>
+                <p className="mt-2 text-sm text-muted-foreground">{t(`faq.items.${key}.answer`)}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-t py-24">
+        <Container className="flex flex-col items-center text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('cta.title')}</h2>
+          <p className="mt-4 max-w-md text-muted-foreground">{t('cta.subtitle')}</p>
+          <Button size="lg" className="mt-8" asChild>
+            <Link href="/register">{t('cta.button')}</Link>
+          </Button>
         </Container>
       </section>
     </>

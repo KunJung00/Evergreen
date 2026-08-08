@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
-import { Leaf, Shield } from 'lucide-react';
+import { Leaf, Settings, Shield } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { SignOutButton } from '@/components/auth/sign-out-button';
+import { PaymentAlertBanner } from '@/components/billing/payment-alert-banner';
 import { Container } from '@/components/layout/container';
 import { LocaleSwitcher } from '@/components/shared/locale-switcher';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
@@ -10,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
 import { Link } from '@/i18n/navigation';
 import { getCurrentUser } from '@/lib/auth/get-session';
+import { getSubscription } from '@/lib/stripe/entitlement';
 
 // Authenticated pages read the session cookie per-request — never prerender them.
 export const dynamic = 'force-dynamic';
@@ -17,9 +19,11 @@ export const dynamic = 'force-dynamic';
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const user = await getCurrentUser();
   const t = await getTranslations('nav');
+  const subscription = user ? await getSubscription(user.id) : null;
 
   return (
     <div className="flex min-h-screen flex-col">
+      {subscription ? <PaymentAlertBanner subscription={subscription} /> : null}
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <Container className="flex h-16 items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
@@ -27,6 +31,12 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             <span>{siteConfig.name}</span>
           </Link>
           <div className="flex items-center gap-1 sm:gap-2">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/settings/profile">
+                <Settings className="size-4" />
+                {t('settings')}
+              </Link>
+            </Button>
             {user?.role === 'admin' ? (
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/admin">

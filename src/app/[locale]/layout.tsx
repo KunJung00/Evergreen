@@ -5,7 +5,9 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 
+import { CookieConsent } from '@/components/shared/cookie-consent';
 import { ThemeProvider } from '@/components/shared/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
@@ -54,6 +56,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             disableTransitionOnChange
           >
             {children}
+            <CookieConsent />
+            <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

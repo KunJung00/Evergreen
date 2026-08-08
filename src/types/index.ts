@@ -12,3 +12,5 @@ export type ActionResult<T = void> =
 export type Profile = Tables<'profiles'>;
 export type Subscription = Tables<'subscriptions'>;
 export type AuditLog = Tables<'audit_logs'>;
+export type Habit = Tables<'habits'>;
+export type HabitLog = Tables<'habit_logs'>;

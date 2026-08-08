@@ -10,6 +10,7 @@
     "pricing": "Pricing",
     "signIn": "Sign in",
     "dashboard": "Dashboard",
+    "settings": "Settings",
     "admin": "Admin",
     "signOut": "Sign out"
   },
@@ -20,6 +21,11 @@
     "label": "Language",
     "th": "ไทย",
     "en": "English"
+  },
+  "cookieConsent": {
+    "message": "We use essential cookies to make this site work.",
+    "privacyLink": "Read our privacy policy",
+    "accept": "Got it"
   },
   "marketing": {
     "hero": {
@@ -42,6 +48,40 @@
         "title": "i18n ready",
         "desc": "Thai and English out of the box with next-intl."
       }
+    },
+    "socialProof": {
+      "title": "Trusted by people building better routines",
+      "stats": {
+        "habitsTracked": { "value": "10,000+", "label": "habits tracked" },
+        "successRate": { "value": "95%", "label": "avg. weekly completion rate" },
+        "activeUsers": { "value": "4.9/5", "label": "satisfaction score" }
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "Can I cancel anytime?",
+          "answer": "Yes. Cancel from account settings whenever you like — you keep access until the end of the billing period you already paid for."
+        },
+        "q2": {
+          "question": "How many habits can I create?",
+          "answer": "Depends on your plan — up to 10 on monthly, up to 50 on yearly."
+        },
+        "q3": {
+          "question": "How far back does my history go?",
+          "answer": "90 days on monthly, a full year of history on yearly."
+        },
+        "q4": {
+          "question": "Is there a mobile app?",
+          "answer": "Not yet — but the web app is fully responsive on mobile."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to build a habit that sticks?",
+      "subtitle": "Sign up today and start tracking your first habit in minutes.",
+      "button": "Get started for free"
     }
   },
   "footer": {
@@ -49,6 +89,107 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "refund": "Refund"
+  },
+  "legal": {
+    "updated": "Last updated: {date}",
+    "terms": {
+      "title": "Terms of Service",
+      "intro": "These terms govern your use of the Evergreen service. By signing up, you agree to be bound by them.",
+      "sections": {
+        "acceptance": {
+          "title": "Acceptance of terms",
+          "body": "Accessing or using the service means you agree to these terms. If you don't agree, please don't use the service."
+        },
+        "service": {
+          "title": "Using the service",
+          "body": "You must meet the legal age of majority and provide accurate account information. You may not use the service for unlawful purposes."
+        },
+        "billing": {
+          "title": "Billing and subscriptions",
+          "body": "Monthly and yearly plans are billed in advance and renew automatically until you cancel from account settings."
+        },
+        "content": {
+          "title": "Your data",
+          "body": "The habits and logs you create belong to you. We only use that data to operate the service."
+        },
+        "termination": {
+          "title": "Account termination",
+          "body": "You can delete your account at any time from settings. We reserve the right to suspend accounts that violate these terms."
+        },
+        "liability": {
+          "title": "Limitation of liability",
+          "body": "The service is provided \"as is\". We don't guarantee it will be error-free or uninterrupted."
+        },
+        "changes": {
+          "title": "Changes to these terms",
+          "body": "We may update these terms from time to time. Continued use after a change means you accept the new terms."
+        },
+        "contact": {
+          "title": "Contact us",
+          "body": "Questions about these terms? Reach us at support@evergreen.app"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": "We take your privacy seriously. This policy explains how we collect, use, and protect your data.",
+      "sections": {
+        "dataCollected": {
+          "title": "Data we collect",
+          "body": "Your email, name, the habits and logs you create, and payment data processed through Stripe."
+        },
+        "dataUse": {
+          "title": "How we use data",
+          "body": "We use your data to operate the service, send weekly summary emails you've opted into, and improve quality."
+        },
+        "dataSharing": {
+          "title": "Data sharing",
+          "body": "We never sell your data. We only share it with necessary processors like Supabase, Stripe, and Resend."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "body": "We use cookies required for the service to function, such as keeping you signed in and remembering your language."
+        },
+        "dataRetention": {
+          "title": "Data retention",
+          "body": "Data is kept for as long as your account is active, and deleted immediately when you delete your account."
+        },
+        "userRights": {
+          "title": "Your rights",
+          "body": "You can access, edit, or delete your personal data at any time from account settings, per your PDPA rights."
+        },
+        "contact": {
+          "title": "Contact us",
+          "body": "Questions about privacy? Reach us at privacy@evergreen.app"
+        }
+      }
+    },
+    "refundPolicy": {
+      "title": "Refund Policy",
+      "intro": "We want you to be happy with the service. This policy explains the terms of a refund.",
+      "sections": {
+        "eligibility": {
+          "title": "Eligibility",
+          "body": "Refunds are available within 7 days of your first payment, provided the service hasn't been used beyond a reasonable trial."
+        },
+        "howToRequest": {
+          "title": "How to request",
+          "body": "Contact support@evergreen.app with the email used to sign up. We respond within 3 business days."
+        },
+        "nonRefundable": {
+          "title": "Non-refundable cases",
+          "body": "Renewals older than 7 days, or accounts suspended for violating our terms, are not eligible for a refund."
+        },
+        "processingTime": {
+          "title": "Processing time",
+          "body": "Approved refunds are returned to your original payment method within 5–10 business days."
+        },
+        "contact": {
+          "title": "Contact us",
+          "body": "For questions, reach us at support@evergreen.app"
+        }
+      }
+    }
   },
   "auth": {
     "login": {
@@ -117,10 +258,102 @@
     "title": "Dashboard",
     "welcome": "Welcome, {name}."
   },
+  "settings": {
+    "nav": {
+      "profile": "Profile",
+      "billing": "Billing",
+      "security": "Security",
+      "danger": "Danger zone"
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "Manage your account information",
+      "emailLabel": "Email",
+      "nameLabel": "Full name",
+      "avatarLabel": "Avatar URL",
+      "save": "Save changes",
+      "saved": "Saved",
+      "preferencesTitle": "Habit tracker preferences",
+      "timezoneLabel": "Timezone",
+      "weekStartLabel": "Week starts on",
+      "weekStartSunday": "Sunday",
+      "weekStartMonday": "Monday",
+      "weeklyEmailLabel": "Receive weekly summary email"
+    },
+    "billing": {
+      "title": "Billing",
+      "subtitle": "View your plan and subscription status",
+      "noPlan": "You don't have an active subscription",
+      "viewPlans": "View plans",
+      "currentPlan": "Current plan",
+      "statusLabel": "Status",
+      "renewsLabel": "Renews on",
+      "manage": "Manage billing",
+      "notConnectedNotice": "Payments aren't connected to real Stripe yet in this environment."
+    },
+    "security": {
+      "title": "Security",
+      "subtitle": "Change your account password",
+      "newPasswordLabel": "New password",
+      "confirmLabel": "Confirm new password",
+      "submit": "Update password",
+      "success": "Password updated successfully"
+    },
+    "danger": {
+      "title": "Danger zone",
+      "subtitle": "Actions on this page can't be undone",
+      "deleteTitle": "Delete account",
+      "deleteBody": "Permanently delete your account and all your data. This action cannot be undone.",
+      "deleteButton": "Delete my account",
+      "confirmTitle": "Confirm account deletion",
+      "confirmDescription": "Type your email to confirm. This action cannot be undone.",
+      "confirmInputLabel": "Email",
+      "confirmButton": "Permanently delete"
+    },
+    "errors": {
+      "validation": "Please check the form and try again",
+      "updateFailed": "Update failed, please try again",
+      "passwordUpdateFailed": "Could not change password, please try again",
+      "nameTooLong": "Name is too long",
+      "invalidUrl": "Enter a valid URL",
+      "invalidTimezone": "Please select a timezone",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "passwordTooLong": "Password must be at most 72 characters",
+      "passwordRequired": "Password is required",
+      "passwordsMustMatch": "Passwords must match",
+      "generic": "Something went wrong, please try again"
+    }
+  },
+  "pricing": {
+    "title": "Choose your plan",
+    "subtitle": "One plan, straightforward pricing. Cancel anytime.",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "saveBadge": "Save {percent}%",
+    "cta": "Get started",
+    "currentPlanCta": "Your current plan",
+    "plans": {
+      "pro": {
+        "name": "Pro",
+        "feature1": "Up to {max} habits",
+        "feature2": "{days} days of history",
+        "feature3": "Weekly summary email",
+        "feature4": "Heatmap and detailed stats"
+      }
+    }
+  },
   "billing": {
     "interval": {
       "month": "Monthly",
       "year": "Yearly"
+    },
+    "alerts": {
+      "pastDue": "Your payment is past due. Please update your payment method.",
+      "canceling": "Your plan will cancel on {date}."
+    },
+    "invoices": {
+      "title": "Invoices",
+      "empty": "No invoices yet"
     },
     "status": {
       "trialing": "Trialing",
@@ -133,12 +366,127 @@
       "paused": "Paused"
     }
   },
+  "habits": {
+    "title": "My habits",
+    "today": "Today",
+    "todaySummary": "{done}/{total} done",
+    "day": {
+      "previous": "Previous day",
+      "next": "Next day"
+    },
+    "empty": {
+      "title": "No habits tracked yet",
+      "cta": "Create your first habit"
+    },
+    "form": {
+      "createTitle": "Create a new habit",
+      "editTitle": "Edit habit",
+      "name": "Habit name",
+      "icon": "Icon",
+      "color": "Color",
+      "frequency": "Frequency",
+      "targetPerDay": "Target per day",
+      "daysPerWeek": "Days per week",
+      "save": "Save"
+    },
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly"
+    },
+    "colors": {
+      "emerald": "Emerald",
+      "blue": "Blue",
+      "violet": "Violet",
+      "amber": "Amber",
+      "rose": "Rose",
+      "cyan": "Cyan",
+      "lime": "Lime",
+      "slate": "Slate"
+    },
+    "manage": {
+      "title": "Manage habits",
+      "subtitle": "Create, edit, archive, or delete your habits",
+      "create": "Create habit",
+      "active": "Active",
+      "archived": "Archived",
+      "archive": "Archive",
+      "restore": "Restore",
+      "edit": "Edit",
+      "delete": "Delete",
+      "usage": "{count}/{limit} habits",
+      "upgrade": "Upgrade plan",
+      "noArchived": "No archived habits"
+    },
+    "recentNotes": "Recent notes",
+    "stats": {
+      "currentStreak": "Current streak",
+      "longestStreak": "Longest streak",
+      "totalDone": "Total done",
+      "completionRate": "30-day completion rate"
+    },
+    "heatmap": {
+      "label": "Heatmap for this habit",
+      "tooltip": "{date} · {count}/{target} done",
+      "less": "Less",
+      "more": "More"
+    },
+    "limit": {
+      "reached": "You've reached your plan's habit limit",
+      "upgrade": "Upgrade to create more habits"
+    },
+    "confirm": {
+      "deleteTitle": "Permanently delete this habit",
+      "deleteBody": "Type the habit name to confirm. All logged data will be deleted too. This action cannot be undone.",
+      "deleteConfirmLabel": "Delete permanently",
+      "typeNameLabel": "Habit name"
+    },
+    "toast": {
+      "created": "Habit created",
+      "updated": "Changes saved",
+      "archived": "Archived",
+      "restored": "Restored",
+      "deleted": "Habit deleted",
+      "reordered": "Reordered"
+    },
+    "errors": {
+      "validation": "Please check the form and try again",
+      "nameRequired": "Habit name is required",
+      "nameTooLong": "Name is too long (60 characters max)",
+      "invalidIcon": "Invalid icon",
+      "invalidTarget": "Invalid target per day",
+      "daysPerWeekRequired": "Please set days per week",
+      "invalidHabit": "Habit not found",
+      "invalidDate": "Invalid date",
+      "invalidCount": "Invalid count",
+      "noteTooLong": "Note is too long (280 characters max)",
+      "limitReached": "You've reached your plan's habit limit",
+      "createFailed": "Could not create habit, please try again",
+      "notFound": "Habit not found",
+      "reorderFailed": "Could not reorder, please try again",
+      "dateOutOfRange": "You can only log up to 7 days back",
+      "toggleFailed": "Could not save, please try again",
+      "generic": "Something went wrong, please try again"
+    }
+  },
+  "errors": {
+    "serverError": {
+      "title": "Something went wrong",
+      "description": "Sorry, something broke on our end. You can try again.",
+      "retry": "Try again"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for may have moved or doesn't exist.",
+      "backHome": "Back home"
+    }
+  },
   "admin": {
     "badge": "Admin",
     "nav": {
       "overview": "Overview",
       "users": "Users",
       "subscriptions": "Subscriptions",
+      "habits": "Habits",
       "logs": "Audit logs"
     },
     "table": {
@@ -206,6 +554,22 @@
         "interval": "Billing",
         "renews": "Renews on",
         "cancelAtPeriodEnd": "Cancels at period end"
+      }
+    },
+    "habits": {
+      "title": "Habits",
+      "subtitle": "Habit tracker usage stats across all users",
+      "cards": {
+        "totalUsers": "Users with habits",
+        "totalHabits": "Total habits",
+        "logsToday": "Logs today"
+      },
+      "columns": {
+        "user": "User",
+        "habitCount": "Habits",
+        "totalLogs": "Total logs",
+        "logsLast7Days": "Logs (last 7 days)",
+        "lastActive": "Last active"
       }
     },
     "logs": {
