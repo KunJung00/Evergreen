@@ -1,0 +1,31 @@
+name: Migrate
+
+# BUILD-SPEC §11 Phase 10: apply Supabase migrations when changes land on main.
+# Requires repo secrets SUPABASE_ACCESS_TOKEN, SUPABASE_PROJECT_REF and
+# SUPABASE_DB_PASSWORD. Guarded to skip when those secrets are absent so forks
+# and unconfigured clones don't fail.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/**'
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Push migrations
+        if: ${{ env.SUPABASE_ACCESS_TOKEN != '' }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          supabase link --project-ref "$PROJECT_REF"
+          supabase db push

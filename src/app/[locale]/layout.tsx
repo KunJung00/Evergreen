@@ -4,6 +4,8 @@ import { IBM_Plex_Sans_Thai } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { CookieConsent } from '@/components/shared/cookie-consent';
 import { ThemeProvider } from '@/components/shared/theme-provider';
@@ -24,13 +26,31 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+const description = 'SaaS starter template with a Habit Tracker feature.';
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s · ${siteConfig.name}`,
   },
-  description: 'SaaS starter template with a Habit Tracker feature.',
+  description,
+  applicationName: siteConfig.name,
+  openGraph: {
+    type: 'website',
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description,
+    url: siteConfig.url,
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: siteConfig.name }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description,
+    images: ['/api/og'],
+  },
+  robots: { index: true, follow: true },
 };
 
 type Props = {
@@ -58,6 +78,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
             <CookieConsent />
             <Toaster />
+            <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

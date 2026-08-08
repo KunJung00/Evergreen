@@ -1,9 +1,34 @@
 # Template gaps
 
-**Status:** BUILD-SPEC Phase 8 done, FEATURE-SPEC H1–H6 done, billing UI shell done. Every
-phase in this document was checked with `pnpm typecheck && pnpm lint && pnpm test && pnpm build`
-— all green — plus a manual key-parity check confirming `messages/th.json` and `messages/en.json`
-have identical key sets (0 missing either direction).
+**Status:** BUILD-SPEC Phases 1–5, 8, 9, 10, 11 done + FEATURE-SPEC H1–H6 done. Phases 6
+(Billing) and 7 (Email) are **intentionally deferred** (see below). Every completed phase was
+checked with `pnpm typecheck && pnpm lint && pnpm test && pnpm build` — all green. Key parity
+between `messages/th.json` and `messages/en.json` is now enforced automatically by
+`tests/unit/i18n-parity.test.ts` (CI fails on drift) rather than a manual check.
+
+## Phases 9–11 completed (this session), 6–7 deferred by request
+
+- **Phase 9 (SEO, Security, Observability):** added `src/lib/logger.ts` (structured JSON logging
+  → Sentry), Sentry wiring (`sentry.server/edge.config.ts`, `src/instrumentation.ts`,
+  `src/instrumentation-client.ts`, `withSentryConfig` in `next.config.mjs`; no-ops without a DSN),
+  security headers (CSP/HSTS/X-Frame-Options/…) in `next.config.mjs`, `robots.ts` + `sitemap.ts`,
+  dynamic OG image (`/api/og`), JSON-LD on the landing page, `/api/health`, Vercel Analytics +
+  Speed Insights, and per-page metadata on marketing/legal pages.
+  - **CSP caveat:** uses `'unsafe-inline'` (not a nonce) because a nonce-based policy requires
+    rewriting `src/middleware.ts`, a locked structural file. `'unsafe-eval'` is dev-only.
+  - Lighthouse ≥ 90 and "error appears in Sentry" acceptance items require a running deploy +
+    real DSN — not verifiable in this environment.
+- **Phase 10 (Testing & CI/CD):** added `tests/unit/i18n-parity.test.ts` and
+  `.github/workflows/migrate.yml` (`supabase db push` on merge to `main`, guarded by secrets).
+  `pr.yml` already ran typecheck→lint→test→build. Branch protection, preview envs and the
+  live e2e job still need repo secrets + a Supabase project to run for real (the e2e job stays
+  `if: false`). The Stripe-webhook fixture test is part of deferred Phase 6.
+- **Phase 11 (Docs & DX):** rewrote `README.md` (5-minute setup), added `docs/architecture.md`,
+  `docs/deployment.md`, `docs/setup-supabase.md`, `docs/setup-stripe.md`, `docs/setup-resend.md`,
+  `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`, and the `pnpm rename-project` script.
+- **Deferred by explicit request:** Phase 6 (real Stripe checkout/portal/sync/webhook — entitlement
+  stays stubbed) and Phase 7 (welcome / verify-email / reset-password / subscription-confirmed /
+  payment-failed / subscription-canceled email templates — only `weeklySummary` exists).
 
 Notes on where the SaaS Starter Template (BUILD-SPEC.md) was incomplete or ambiguous
 when building the Habit Tracker feature (FEATURE-SPEC-habit-tracker.md) on top of it,

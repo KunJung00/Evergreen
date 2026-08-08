@@ -1,5 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
+import * as Sentry from '@sentry/nextjs';
+
 import './globals.css';
 
 /**
@@ -8,11 +11,16 @@ import './globals.css';
  * replaces the root layout entirely, so no next-intl provider is available.
  */
 export default function GlobalError({
+  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <html lang="th">
       <body className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background text-center font-sans text-foreground">

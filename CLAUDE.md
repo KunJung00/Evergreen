@@ -45,5 +45,7 @@ If a feature genuinely requires editing them → **stop, ask, and record the gap
 Template PHASE 1 → 11 (BUILD-SPEC §11), then feature H1 → H6 (FEATURE-SPEC §11).
 Do phases in order; pass each phase's Acceptance before moving on.
 
-**Current state:** Phase 1 (Foundation) scaffolding in place — Next.js 14 + TS strict +
-Tailwind + tooling (prettier, husky, commitlint, vitest, playwright) + folder skeleton.
+**Current state:** Template PHASES 1–5 + 8 + 9 + 10 + 11 done; feature H1–H6 done.
+**Intentionally deferred:** PHASE 6 (Billing — UI shell only, `entitlement.ts` stubbed) and
+PHASE 7 (Email — only the `weeklySummary` template exists). See `docs/template-gaps.md`.
+All completed phases pass `pnpm typecheck && pnpm lint && pnpm test && pnpm build`.

@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Container } from '@/components/layout/container';
+import { JsonLd, organizationJsonLd, websiteJsonLd } from '@/components/shared/json-ld';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Locale } from '@/i18n/routing';
@@ -12,7 +13,13 @@ type Props = { params: Promise<{ locale: string }> };
 export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
-  return <LandingContent />;
+  return (
+    <>
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={websiteJsonLd()} />
+      <LandingContent />
+    </>
+  );
 }
 
 function LandingContent() {
