@@ -1,0 +1,7 @@
+-- Dev seed. Runs after migrations on `supabase db reset`.
+--
+-- Profiles are created automatically by the on_auth_user_created trigger, so
+-- there is nothing to insert here until a user signs up through the auth flow.
+--
+-- To promote your first local user to admin during development, sign up, then:
+--   update public.profiles set role = 'admin' where email = 'you@example.com';

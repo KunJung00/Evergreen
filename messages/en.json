@@ -9,7 +9,8 @@
   "nav": {
     "pricing": "Pricing",
     "signIn": "Sign in",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "signOut": "Sign out"
   },
   "theme": {
     "toggle": "Toggle theme"
@@ -47,5 +48,72 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "refund": "Refund"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign up"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Start building habits that stick",
+      "nameLabel": "Full name",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "verifyTitle": "Check your inbox",
+      "verifyNotice": "We've sent a confirmation link to your email. Click it to activate your account."
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "emailLabel": "Email",
+      "submit": "Send reset link",
+      "sentTitle": "Check your inbox",
+      "sent": "If an account exists for that email, a reset link is on its way.",
+      "backToLogin": "Back to sign in"
+    },
+    "resetPassword": {
+      "title": "Set a new password",
+      "subtitle": "Choose a strong password you haven't used before",
+      "passwordLabel": "New password",
+      "confirmLabel": "Confirm password",
+      "submit": "Update password"
+    },
+    "verifyEmail": {
+      "title": "Verify your email",
+      "subtitle": "We've sent you a confirmation link. Open it to finish signing up.",
+      "backToLogin": "Back to sign in"
+    },
+    "oauth": {
+      "google": "Continue with Google"
+    },
+    "errors": {
+      "invalidEmail": "Enter a valid email address.",
+      "passwordRequired": "Password is required.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordTooLong": "Password must be at most 72 characters.",
+      "passwordsMustMatch": "Passwords do not match.",
+      "nameRequired": "Name is required.",
+      "nameTooLong": "Name is too long.",
+      "validation": "Please check the form and try again.",
+      "invalidCredentials": "Invalid email or password.",
+      "signUpFailed": "Could not create your account. Try again.",
+      "resetFailed": "Could not update your password. Try again.",
+      "rateLimited": "Too many attempts. Please wait a moment and try again.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {name}."
   }
 }
