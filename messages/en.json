@@ -257,7 +257,17 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Welcome, {name}."
+    "welcome": "Welcome, {name}.",
+    "stats": {
+      "doneToday": "Done today",
+      "bestStreak": "Best streak",
+      "completionRate": "30-day completion rate",
+      "totalDone": "Total done"
+    },
+    "progress": {
+      "title": "Progress · last {days} days",
+      "tooltip": "{date}: {done}/{total} habits done"
+    }
   },
   "settings": {
     "nav": {

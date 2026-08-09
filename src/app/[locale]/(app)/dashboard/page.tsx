@@ -1,16 +1,19 @@
 import { Plus, Settings2 } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { DashboardStats } from '@/components/habits/dashboard-stats';
 import { DayNav } from '@/components/habits/day-nav';
 import { HabitCard } from '@/components/habits/habit-card';
+import { ProgressChart } from '@/components/habits/progress-chart';
 import { EmptyState } from '@/components/shared/empty-state';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { requireAuth } from '@/lib/auth/require-auth';
 import { isWithinBackfillWindow, todayInTz } from '@/lib/habits/date';
 import { requireActiveSubscription } from '@/lib/stripe/entitlement';
-import { getTodayView } from '@/server/queries/habits';
+import { getDashboardStats, getTodayView } from '@/server/queries/habits';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -33,7 +36,7 @@ export default async function DashboardPage({ params, searchParams }: Props) {
   const today = todayInTz(user.timezone);
   const date = dateParam && isWithinBackfillWindow(dateParam, today, 7) ? dateParam : today;
 
-  const habits = await getTodayView(date);
+  const [habits, stats] = await Promise.all([getTodayView(date), getDashboardStats(date)]);
   const doneCount = habits.filter((h) => h.todayCount >= h.target_per_day).length;
 
   return (
@@ -52,6 +55,17 @@ export default async function DashboardPage({ params, searchParams }: Props) {
           </Link>
         </Button>
       </div>
+
+      {stats.totalHabits > 0 ? (
+        <>
+          <DashboardStats stats={stats} />
+          <Card>
+            <CardContent className="pt-6">
+              <ProgressChart trend={stats.trend} totalHabits={stats.totalHabits} />
+            </CardContent>
+          </Card>
+        </>
+      ) : null}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <DayNav date={date} today={today} />

@@ -1,7 +1,12 @@
 import 'server-only';
 
 import { shiftDate, todayInTz } from '@/lib/habits/date';
-import { calcCompletionRate, calcCurrentStreak, calcLongestStreak } from '@/lib/habits/streak';
+import {
+  calcCompletionRate,
+  calcCurrentStreak,
+  calcLongestStreak,
+  type Frequency,
+} from '@/lib/habits/streak';
 import { getCurrentUser } from '@/lib/auth/get-session';
 import { createClient } from '@/lib/supabase/server';
 import type { Habit } from '@/types';
@@ -102,6 +107,112 @@ export async function getHabitStats(habitId: string): Promise<HabitStats> {
     longestStreak: calcLongestStreak(dates, frequency),
     totalDone: dates.length,
     completionRate30d: calcCompletionRate(dates, shiftDate(today, -29), today),
+  };
+}
+
+export type DashboardStats = {
+  /** Active habits whose target for `date` is met. */
+  doneToday: number;
+  /** Active habits total (the denominator for `doneToday`). */
+  totalHabits: number;
+  /** Best current streak across all active habits, in days/weeks. */
+  bestStreak: number;
+  /** Average 30-day completion rate across active habits (0-100). */
+  completionRate30d: number;
+  /** All-time completions logged across active habits. */
+  totalDone: number;
+  /** Habits meeting their target per day for the last `TREND_DAYS` days, oldest first. */
+  trend: DailyProgress[];
+};
+
+export type DailyProgress = { date: string; done: number };
+
+/** Days shown in the dashboard progress chart. */
+const TREND_DAYS = 14;
+
+/**
+ * Aggregate momentum stats across every active habit, for the dashboard header
+ * (progress at a glance, not per-habit). Streaks/rates are measured against the
+ * real `today`, independent of the browsed `date`. Two queries total — habits
+ * plus their logs — grouped in memory, same convention as the admin overview.
+ */
+export async function getDashboardStats(date: string): Promise<DashboardStats> {
+  const supabase = createClient();
+  const user = await getCurrentUser();
+  const timezone = user?.timezone ?? 'Asia/Bangkok';
+
+  const { data: habits } = await supabase
+    .from('habits')
+    .select('id, frequency, target_per_day')
+    .is('archived_at', null)
+    .limit(MAX_ROWS);
+
+  const today = todayInTz(timezone);
+  const trendDays = Array.from({ length: TREND_DAYS }, (_, i) =>
+    shiftDate(today, -(TREND_DAYS - 1 - i)),
+  );
+
+  if (!habits || habits.length === 0) {
+    return {
+      doneToday: 0,
+      totalHabits: 0,
+      bestStreak: 0,
+      completionRate30d: 0,
+      totalDone: 0,
+      trend: trendDays.map((d) => ({ date: d, done: 0 })),
+    };
+  }
+
+  const { data: logs } = await supabase
+    .from('habit_logs')
+    .select('habit_id, logged_date, count')
+    .in(
+      'habit_id',
+      habits.map((h) => h.id),
+    )
+    .limit(MAX_ROWS);
+
+  const datesByHabit = new Map<string, string[]>();
+  // Summed count per habit per date — `${habitId}|${date}` → count.
+  const countByHabitDate = new Map<string, number>();
+  for (const log of logs ?? []) {
+    const existing = datesByHabit.get(log.habit_id);
+    if (existing) existing.push(log.logged_date);
+    else datesByHabit.set(log.habit_id, [log.logged_date]);
+    const key = `${log.habit_id}|${log.logged_date}`;
+    countByHabitDate.set(key, (countByHabitDate.get(key) ?? 0) + log.count);
+  }
+
+  const isDoneOn = (habitId: string, target: number, day: string) =>
+    (countByHabitDate.get(`${habitId}|${day}`) ?? 0) >= target;
+
+  const from = shiftDate(today, -29);
+
+  let doneToday = 0;
+  let bestStreak = 0;
+  let totalDone = 0;
+  let rateSum = 0;
+  for (const habit of habits) {
+    const dates = datesByHabit.get(habit.id) ?? [];
+    const frequency = (habit.frequency ?? 'daily') as Frequency;
+    if (isDoneOn(habit.id, habit.target_per_day, date)) doneToday++;
+    bestStreak = Math.max(bestStreak, calcCurrentStreak(dates, today, frequency));
+    totalDone += dates.length;
+    rateSum += calcCompletionRate(dates, from, today);
+  }
+
+  const trend = trendDays.map((day) => ({
+    date: day,
+    done: habits.filter((h) => isDoneOn(h.id, h.target_per_day, day)).length,
+  }));
+
+  return {
+    doneToday,
+    totalHabits: habits.length,
+    bestStreak,
+    completionRate30d: Math.round(rateSum / habits.length),
+    totalDone,
+    trend,
   };
 }
 

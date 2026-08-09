@@ -257,7 +257,17 @@
   },
   "dashboard": {
     "title": "แดชบอร์ด",
-    "welcome": "ยินดีต้อนรับ {name}"
+    "welcome": "ยินดีต้อนรับ {name}",
+    "stats": {
+      "doneToday": "ทำสำเร็จวันนี้",
+      "bestStreak": "สตรีคยาวสุดที่กำลังทำอยู่",
+      "completionRate": "อัตราสำเร็จ 30 วัน",
+      "totalDone": "ทำสำเร็จทั้งหมด"
+    },
+    "progress": {
+      "title": "ความคืบหน้า · {days} วันล่าสุด",
+      "tooltip": "{date}: ทำสำเร็จ {done}/{total} นิสัย"
+    }
   },
   "settings": {
     "nav": {
